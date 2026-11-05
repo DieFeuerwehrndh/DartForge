@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DartForge - Dein Dart-spiel</title>
+    
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+<meta name="theme-color" content="#1b2732">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DartForge">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="kopf">
+        <div>
+            <h1><span>Dart</span>Forge</h1>
+            <p>Dein persönlicher Dart-Hub</p>
+        </div>
+        <div class="dart-symbol">🎯</div>
+    </header>
+
+    <main>
+        <section class="begruesung">
+            <h2>Willkommen zurück!</h2>
+            <p>Worauf hast du heute Lust?</p>
+        </section>
+
+        <section class="spielbereich">
+            <h2>Spielmodus auswählen</h2>
+
+            <div class="spiel-grid">
+                <button class="spielkarte" data-mode="tictactoe">
+                    <span class="symbol">▦</span>
+                    <span class="karten-titel">Dart Tic-Tac-Toe</span>
+                    <span class="beschreibung">
+                        Varianten, Training und 2 Spieler
+                    </span>
+                </button>
+
+                <button class="spielkarte" data-mode="x01">
+                    <span class="symbol">🎯</span>
+                    <span class="karten-titel">501 / X01</span>
+                    <span class="beschreibung">
+                        Punkte zählen und Restscore
+                    </span>
+                </button>
+
+                <button class="spielkarte" data-mode="checkout">
+                    <span class="symbol">➜</span>
+                    <span class="karten-titel">Checkout-Training</span>
+                    <span class="beschreibung">
+                        Auscheckwege üben
+                    </span>
+                </button>
+
+                <button class="spielkarte" data-mode="stats">
+                    <span class="symbol">▥</span>
+                    <span class="karten-titel">Statistiken</span>
+                    <span class="beschreibung">
+                        Deine Fortschritte ansehen
+                    </span>
+                </button>
+            </div>
+        </section>
+
+        
+<section id="tictactoeBereich" class="info-karte spielbereich-neu" hidden>
+    <h2>Dart Tic-Tac-Toe</h2>
+    <p>Wähle einen Modus und starte deine Runde.</p>
+
+    <label for="spielmodus">Spielmodus</label>
+    <select id="spielmodus">
+        <option value="two">Zwei Spieler</option>
+        <option value="training">Training allein</option>
+        <option value="bot">Gegen Bot</option>
+    </select>
+
+    <label for="variantenwahl">Dart-Variante</label>
+    <select id="variantenwahl">
+        <option value="mixed">Gemischte Aufgaben</option>
+        <option value="sequence">Zahlenfolgen</option>
+        <option value="color">Farben treffen</option>
+        <option value="63">63+ Punkte mit maximal 3 Darts</option>
+        <option value="double">Doppel D17–D20</option>
+    </select>
+
+    <div class="spiel-kopf">
+        <strong id="spielerAnzeige">Am Zug: Spieler X</strong>
+        <button id="neustart" type="button">Neue Runde</button>
+    </div>
+
+    <div id="ticTacToeFeld" class="tic-tac-toe-feld"></div>
+
+    <p id="spielMeldung" aria-live="polite">
+        Wähle ein Feld, um eine Aufgabe zu beginnen.
+    </p>
+
+    <button id="zurueckStart" type="button" class="zurueck-button">
+        ☰ Menü
+    </button>
+</section>
+
+
+
+<section id="x01Bereich" class="info-karte spielbereich-neu" hidden>
+    <h2>501 / X01</h2>
+    <p>Spiele ein vollständiges Dart-Leg mit automatischer Punkteberechnung.</p>
+
+    <div class="x01-einstellungen">
+        <label for="x01Startscore">Startpunktzahl</label>
+        <select id="x01Startscore">
+            <option value="501">501 Punkte</option>
+            <option value="301">301 Punkte</option>
+            <option value="701">701 Punkte</option>
+            <option value="custom">Eigene Startpunktzahl</option>
+        </select>
+
+        <div id="x01EigeneStartzahlBereich" hidden>
+            <label for="x01EigeneStartzahl">Eigene Punktzahl</label>
+            <input
+                type="number"
+                id="x01EigeneStartzahl"
+                min="2"
+                max="10000"
+                step="1"
+                value="501"
+            >
+        </div>
+
+        <label for="x01Spielmodus">Spielmodus</label>
+        <select id="x01Spielmodus">
+            <option value="two">Zwei Spieler</option>
+            <option value="training">Training allein</option>
+            <option value="bot">Gegen den Bot</option>
+        </select>
+
+        <label for="x01BotSchwierigkeit">Bot-Schwierigkeit</label>
+        <select id="x01BotSchwierigkeit">
+            <option value="leicht">Leicht</option>
+            <option value="mittel" selected>Mittel</option>
+            <option value="schwer">Schwer</option>
+        </select>
+
+        <label for="x01DoubleOut">Spielende</label>
+        <select id="x01DoubleOut">
+            <option value="an" selected>Double-Out</option>
+            <option value="aus">Straight-Out</option>
+        </select>
+    </div>
+
+    <div class="spiel-kopf">
+        <strong id="x01SpielerAnzeige">Am Zug: Spieler 1</strong>
+        <button id="x01Neustart" type="button">Neues Leg</button>
+    </div>
+
+    <div class="x01-punktestand">
+        <div id="x01SpielerX">
+            <span>Spieler 1</span>
+            <strong id="x01PunkteX">501</strong>
+            <small id="x01AufnahmenX">Aufnahmen: 0</small>
+        </div>
+
+        <div id="x01SpielerO">
+            <span id="x01NameO">Spieler 2</span>
+            <strong id="x01PunkteO">501</strong>
+            <small id="x01AufnahmenO">Aufnahmen: 0</small>
+        </div>
+    </div>
+
+    <p id="x01Aufnahme">Dart 1 von 3</p>
+    <p id="x01Darts">Noch keine Darts geworfen.</p>
+
+    <h3>Treffer eingeben</h3>
+
+    <label for="x01Ring">Trefferart</label>
+    <select id="x01Ring">
+        <option value="S">Single</option>
+        <option value="D">Double</option>
+        <option value="T">Triple</option>
+    </select>
+
+    <label for="x01Zahl">Zahl</label>
+    <select id="x01Zahl">
+        <option value="20">20</option>
+        <option value="19">19</option>
+        <option value="18">18</option>
+        <option value="17">17</option>
+        <option value="16">16</option>
+        <option value="15">15</option>
+        <option value="14">14</option>
+        <option value="13">13</option>
+        <option value="12">12</option>
+        <option value="11">11</option>
+        <option value="10">10</option>
+        <option value="9">9</option>
+        <option value="8">8</option>
+        <option value="7">7</option>
+        <option value="6">6</option>
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+    </select>
+
+    <div class="x01-treffer-buttons">
+        <button id="x01Bull" type="button">Bull 25</button>
+        <button id="x01Bullseye" type="button">Bullseye 50</button>
+        <button id="x01Miss" type="button">Daneben (0)</button>
+        <button id="x01Eintragen" type="button">Treffer eintragen</button>
+    </div>
+
+    <p id="x01Meldung" aria-live="polite">
+        Gib deinen ersten Dart ein.
+    </p>
+
+    <button id="x01Zurueck" type="button" class="zurueck-button">
+        ☰ Menü
+    </button>
+</section>
+
+
+<section id="checkoutBereich" class="info-karte spielbereich-neu" hidden>
+    <h2>Checkout-Training</h2>
+    <p>Trainiere allein deine Auscheckwege – ohne Bot und ohne zweiten Spieler.</p>
+
+    <label for="checkoutOutModus">Checkout-Regel</label>
+    <select id="checkoutOutModus">
+        <option value="double">Double-Out</option>
+        <option value="single">Single-Out</option>
+    </select>
+
+    <div class="checkout-stand">
+        <p>Dein Restscore</p>
+        <strong id="checkoutRest">40</strong>
+        <p id="checkoutAufgabe">Aufgabe 1</p>
+    </div>
+
+    <label for="checkoutRing">Trefferart</label>
+    <select id="checkoutRing">
+        <option value="S">Single</option>
+        <option value="D">Double</option>
+        <option value="T">Triple</option>
+    </select>
+
+    <label for="checkoutZahl">Zahl</label>
+    <select id="checkoutZahl">
+        <option value="20">20</option>
+        <option value="19">19</option>
+        <option value="18">18</option>
+        <option value="17">17</option>
+        <option value="16">16</option>
+        <option value="15">15</option>
+        <option value="14">14</option>
+        <option value="13">13</option>
+        <option value="12">12</option>
+        <option value="11">11</option>
+        <option value="10">10</option>
+        <option value="9">9</option>
+        <option value="8">8</option>
+        <option value="7">7</option>
+        <option value="6">6</option>
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+    </select>
+
+    <div class="checkout-buttons">
+        <button id="checkoutBull" type="button">Bull 25</button>
+        <button id="checkoutBullseye" type="button">Bullseye 50</button>
+        <button id="checkoutMiss" type="button">Daneben (0)</button>
+        <button id="checkoutEintragen" type="button">Treffer eintragen</button>
+    </div>
+
+    <p id="checkoutDarts">Noch keine Darts geworfen.</p>
+    <p id="checkoutMeldung" aria-live="polite">Finde deinen Checkout!</p>
+
+    <button id="checkoutHinweis" type="button">Checkout-Weg anzeigen</button>
+    <p id="checkoutWeg" hidden></p>
+
+    <button id="checkoutNeu" type="button">Neue Aufgabe</button>
+    <button id="checkoutZurueck" type="button" class="zurueck-button">☰ Menü</button>
+</section>
+
+
+<section id="statsBereich" class="info-karte spielbereich-neu" hidden>
+    <h2>Deine Statistiken</h2>
+    <p>Hier siehst du deine bisherigen Fortschritte bei DartForge.</p>
+
+    <div class="stats-grid">
+        <div class="stats-karte">
+            <span>Gespielte X01-Legs</span>
+            <strong id="statsX01Legs">0</strong>
+        </div>
+
+        <div class="stats-karte">
+            <span>X01-Siege</span>
+            <strong id="statsX01Siege">0</strong>
+        </div>
+
+        <div class="stats-karte">
+            <span>Checkout-Aufgaben</span>
+            <strong id="statsCheckoutAufgaben">0</strong>
+        </div>
+
+        <div class="stats-karte">
+            <span>Erfolgreiche Checkouts</span>
+            <strong id="statsCheckoutErfolge">0</strong>
+        </div>
+
+        <div class="stats-karte">
+            <span>Höchste Aufnahme</span>
+            <strong id="statsHoechsteAufnahme">0</strong>
+        </div>
+
+        <div class="stats-karte">
+            <span>Checkout-Quote</span>
+            <strong id="statsCheckoutQuote">0 %</strong>
+        </div>
+    </div>
+
+    <button id="statsZurueck" type="button" class="zurueck-button">
+        ☰ Menü
+    </button>
+</section>
+
+
+        <section class="info-karte">
+            <h2 id="infoTitel">Deine Dart-Zentrale</h2>
+            <p id="infoText">
+                Wähle einen Spielmodus aus, um mehr darüber zu erfahren.
+            </p>
+        </section>
+
+        <footer>
+            <p>DartForge · Mein Darttrainer Made with ❤️ in Germany · Kontaktadresse:Dartforge.info@gmail.com </p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+    
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js")
+        .then(() => console.log("DartForge: Offline-Unterstützung aktiviert."))
+        .catch((error) => {
+          console.error("Service Worker konnte nicht registriert werden:", error);
+        });
+    });
+  }
+</script>
+
+</body>
+</html>
