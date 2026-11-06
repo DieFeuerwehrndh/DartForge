@@ -1,5 +1,5 @@
 
-const CACHE_NAME = "dartforge-v3";
+const CACHE_NAME = "dartVexo-v3";
 
 const APP_FILES = [
     "./",
