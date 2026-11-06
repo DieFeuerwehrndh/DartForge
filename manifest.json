@@ -1,8 +1,8 @@
 
 {
   "id": "./",
-  "name": "DartForge – Dein Dart-Spiel",
-  "short_name": "DartForge",
+  "name": "DartVexo – Dein Dart-Spiel",
+  "short_name": "DartVexo",
   "description": "Deine Dart-App mit X01, Checkout-Training und Dart-Tic-Tac-Toe.",
   "lang": "de-DE",
   "start_url": "./index.html",
