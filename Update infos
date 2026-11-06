@@ -1,0 +1,28 @@
+# DartForge V3 – Update-Logbuch
+
+**Datum:** 06.11.2026  
+**Version:** Fehlerbehebungen und Verbesserungen
+
+## Änderungen und Verbesserungen
+
+### 1. Offline-Unterstützung verbessert
+- Fehler bei der Offline-Nutzung behoben.
+- Zwischengespeicherte Dateien werden aktualisiert.
+- Änderungen an der App werden nach einem Update zuverlässiger übernommen.
+- Die Nutzung der App ohne aktive Internetverbindung wurde verbessert.
+
+### 2. Navigation verbessert
+- Fehler beim Zurückkehren aus dem Statistikbereich behoben.
+- Menübuttons in den verschiedenen Spielbereichen vereinheitlicht.
+- Rückkehr zum Hauptmenü verbessert.
+
+### 3. Allgemeine Stabilitätsverbesserungen
+- Fehler in der Navigation untersucht und behoben.
+- Funktionsfähigkeit der verschiedenen App-Bereiche überprüft.
+
+---
+
+**Projekt:** DartForge  
+**Entwicklungsstatus:** Laufende Weiterentwicklung
+
+Weitere Verbesserungen und Fehlerbehebungen folgen.
