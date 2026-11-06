@@ -1084,13 +1084,3 @@ document.getElementById("checkoutHinweis").addEventListener("click", function ()
 checkoutOutModus.addEventListener("change", checkoutNeueAufgabe);
 
 checkoutNeueAufgabe();
-
-if (statsZurueck) {
-    statsZurueck.addEventListener("click", () => {
-        statsBereich.hidden = true;
-
-        if (spielbereich) spielbereich.hidden = true;
-        if (begruessung) begruessung.hidden = false;
-        if (infoKarte) infoKarte.hidden = false;
-    });
-}
