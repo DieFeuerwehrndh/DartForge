@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DartForge - Dein Dart-spiel</title>
+    <title>Dartvexo - Dein Dart-spiel</title>
     
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
 <meta name="theme-color" content="#1b2732">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="DartForge">
+<meta name="apple-mobile-web-app-title" content="Dartvexo">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <link rel="stylesheet" href="style.css">
@@ -293,7 +293,7 @@
 
 <section id="statsBereich" class="info-karte spielbereich-neu" hidden>
     <h2>Deine Statistiken</h2>
-    <p>Hier siehst du deine bisherigen Fortschritte bei DartForge.</p>
+    <p>Hier siehst du deine bisherigen Fortschritte bei Dartvexo(Bald funktionsfähig).</p>
 
     <div class="stats-grid">
         <div class="stats-karte">
@@ -341,7 +341,7 @@
         </section>
 
         <footer>
-            <p>DartForge · Mein Darttrainer Made with ❤️ in Germany · Kontaktadresse:Dartforge.info@gmail.com </p>
+            <p>Dartvexo · Mein Darttrainer Made with ❤️ in Germany · Kontaktadresse:dartvexo@gmail.com </p>
         </footer>
     </main>
 
@@ -351,7 +351,7 @@
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
       navigator.serviceWorker.register("./service-worker.js")
-        .then(() => console.log("DartForge: Offline-Unterstützung aktiviert."))
+        .then(() => console.log("Dartvexo: Offline-Unterstützung aktiviert."))
         .catch((error) => {
           console.error("Service Worker konnte nicht registriert werden:", error);
         });
