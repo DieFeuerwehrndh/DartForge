@@ -480,4 +480,29 @@ spielbereich-neu button {
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
     }
+
+/* DartVexo Footer */
+
+.dartvexo-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 25px 15px;
+    margin-top: 30px;
+    font-size: 13px;
+    opacity: 0.75;
+}
+
+.dartvexo-footer a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.dartvexo-footer a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
 }
