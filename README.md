@@ -1,4 +1,4 @@
-# DartForge – Offline Edition
+# Dartvexo– Offline Edition
 
 **Deine Dart-Trainingsplattform. Deine Regeln. Keine Cloud.**
 
@@ -18,11 +18,7 @@ DartForge benötigt keine Registrierung, kein Benutzerkonto und keinen Cloud-Spe
 
 **Achtung:** Beim Löschen der Browserdaten oder beim Wechsel auf ein anderes Gerät können lokale Daten verloren gehen. Erstelle regelmäßig ein Backup. (ES WIRD KEINE HAFTUNG ÜBERNOMMEN BEI DATEN VERLUSST)
 
-## Installation
-
-1. Öffne die downloadfile
-2. Nutze DartForge direkt im Browser. Oder auf dem Handy als app auf dem startbildschirm
-3. Installiere die App über die Installationsfunktion deines Browsers, sofern verfügbar.
+**BEKOMMEN VOM ZUGANG** 
 
 ## Entwicklungsstatus
 
