@@ -26,45 +26,57 @@ export default {
 
         const url = new URL(request.url);
 
-        // Patreon-Kampagnen-ID abfragen
+        // Patreon-Kampagnen abfragen
         if (
             request.method === "GET" &&
             url.pathname === "/api/setup/campaign"
         ) {
+            // Prüfen, ob das Secret vorhanden ist
             if (!env.PATREON_CREATOR_ACCESS_TOKEN) {
                 return Response.json({
                     success: false,
-                    message: "Creator-Zugangs-Token fehlt."
+                    error: "SECRET_MISSING",
+                    message: "Creator-Zugangs-Token ist nicht verfügbar."
                 }, { status: 500, headers });
             }
 
-            const response = await fetch(
-                "https://www.patreon.com/api/oauth2/v2/campaigns",
-                {
-                    headers: {
-                        "Authorization": `Bearer ${env.PATREON_CREATOR_ACCESS_TOKEN}`,
-                        "User-Agent": "DartVexo/1.0"
+            try {
+                const response = await fetch(
+                    "https://www.patreon.com/api/oauth2/v2/campaigns",
+                    {
+                        headers: {
+                            "Authorization": `Bearer ${env.PATREON_CREATOR_ACCESS_TOKEN}`,
+                            "User-Agent": "DartVexo/1.0"
+                        }
                     }
+                );
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    return Response.json({
+                        success: false,
+                        error: "PATREON_API_ERROR",
+                        status: response.status,
+                        message: "Patreon hat die Anfrage abgelehnt."
+                    }, { status: 502, headers });
                 }
-            );
 
-            const result = await response.json();
+                return Response.json({
+                    success: true,
+                    campaigns: (result.data || []).map(campaign => ({
+                        id: campaign.id,
+                        name: campaign.attributes?.name || "Unbenannte Kampagne"
+                    }))
+                }, { headers });
 
-            if (!response.ok) {
+            } catch (error) {
                 return Response.json({
                     success: false,
-                    message: "Patreon konnte nicht abgefragt werden.",
-                    status: response.status
+                    error: "REQUEST_FAILED",
+                    message: "Verbindung zu Patreon fehlgeschlagen."
                 }, { status: 502, headers });
             }
-
-            return Response.json({
-                success: true,
-                campaigns: (result.data || []).map(campaign => ({
-                    id: campaign.id,
-                    name: campaign.attributes?.name || "Unbenannte Kampagne"
-                }))
-            }, { headers });
         }
 
         // Backend-Verbindung testen
