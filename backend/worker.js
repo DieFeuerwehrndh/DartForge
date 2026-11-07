@@ -1,4 +1,3 @@
-const PATREON_CREATOR_ACCESS_TOKEN = "q0R5pqpw_AkTZdlNqecVd0aajKfieNDJvvYINZx-WL8";
 const ALLOWED_ORIGIN = "https://diefeuerwehrndh.github.io";
 
 function corsHeaders(origin) {
@@ -32,7 +31,7 @@ export default {
             url.pathname === "/api/setup/campaign"
         ) {
             // Prüfen, ob das Secret vorhanden ist
-           if (!env.PATREON_CREATOR_ACCESS_TOKEN) {
+           if (!env.PARTREON_CAT) {
     return Response.json({
         success: false,
         error: "SECRET_MISSING",
@@ -49,7 +48,7 @@ return Response.json({
                     "https://www.patreon.com/api/oauth2/v2/campaigns",
                     {
                         headers: {
-                            "Authorization": `Bearer ${env.PATREON_CREATOR_ACCESS_TOKEN}`,
+                            "Authorization": `Bearer ${env.PARTREON_CAT}`,
                             "User-Agent": "DartVexo/1.0"
                         }
                     }
