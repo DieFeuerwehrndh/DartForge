@@ -1,4 +1,4 @@
-
+const PATREON_CREATOR_ACCESS_TOKEN = "q0R5pqpw_AkTZdlNqecVd0aajKfieNDJvvYINZx-WL8";
 const ALLOWED_ORIGIN = "https://diefeuerwehrndh.github.io";
 
 function corsHeaders(origin) {
