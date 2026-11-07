@@ -38,11 +38,6 @@ export default {
         message: "Secret ist nicht verfügbar."
     }, { status: 500, headers });
 }
-
-return Response.json({
-    success: true,
-    secretAvailable: true
-}, { headers });
             try {
                 const response = await fetch(
                     "https://www.patreon.com/api/oauth2/v2/campaigns",
