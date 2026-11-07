@@ -31,7 +31,7 @@ export default {
             url.pathname === "/api/setup/campaign"
         ) {
             // Prüfen, ob das Secret vorhanden ist
-           if (!env.PARTREON_CAT) {
+           if (!env.PATREON_CAT) {
     return Response.json({
         success: false,
         error: "SECRET_MISSING",
@@ -48,7 +48,7 @@ return Response.json({
                     "https://www.patreon.com/api/oauth2/v2/campaigns",
                     {
                         headers: {
-                            "Authorization": `Bearer ${env.PARTREON_CAT}`,
+                            "Authorization": `Bearer ${env.PATREON_CAT}`,
                             "User-Agent": "DartVexo/1.0"
                         }
                     }
